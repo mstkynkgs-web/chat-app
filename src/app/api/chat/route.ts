@@ -49,8 +49,11 @@ export async function POST(request: Request) {
         const data = await request.json();
         const currentMessages = getMessageFromFile();
 
+        //タイムスタンプでIDを生成
+        const now = Date.now();
+
         const userMsg: ChatObj = {
-            id: chatMessages.length + 1,
+            id: now,
             role: "user",
             message: data.message
         };
@@ -58,7 +61,7 @@ export async function POST(request: Request) {
 
         // Botの返信
         const botMsg: ChatObj = {
-            id: chatMessages.length + 1,
+            id: now + 1,
             role: "bot",
             message: `「${data.message}」と受け取りました。`
         }
